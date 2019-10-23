@@ -1,4 +1,4 @@
- /* This program scrambles a word from the list and then makes a unscramble game for a person to play
+ /* This program
   *
   *
   * Aryan Tayal
@@ -29,13 +29,14 @@
          out = new FileOutputStream(outputFile);
 
          Scanner inFile = new Scanner(new File(inputFile));
+         int firstLine = Integer.parseInt(inFile.nextLine());
+         int[][] dataPieces = new int [firstLine][3];
 
-         String [] tokens = inputFile.split("/");
-
-         while (inFile.hasNext()) {
-             for(int i = 0; i< tokens.length; i++){
-                System.out.print(tokens[i]);
-             }
+         for (int i = 0; i< firstLine; i++) {
+             String [] tokens = inFile.nextLine().split("/");
+             dataPieces[i][0] = Integer.parseInt(tokens[1]);
+             dataPieces[i][1] = Integer.parseInt(tokens[0]);
+             dataPieces[i][2] = Integer.parseInt(tokens[2]);
 
          }
 
