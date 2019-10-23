@@ -48,23 +48,24 @@
              System.out.print("\n\t(3) DOW, Month DDD, YYYY (ex. Monday, August 26, 2019, no leading zeroes)");
              System.out.print("\n\t(4) Julian format, YYYYddd (where dd is day from 001-365)\n" +
                      "Enter an option, 1-4:");
-            /* int choice = s.nextLine(0);
-             if (choice = 1) {
+             int choice = Integer.parseInt(s.nextLine());
+             if (choice == 1) {
 
              }
-             if (choice = 2) {
+             else if (choice == 2) {
 
              }
-             if (choice = 3) {
+             else if (choice == 3) {
 
              }
-             if (choice = 4) {
+             else if (choice == 4) {
 
              } else {
-
+                System.out.println("Invalid Entry, Please enter a value from 1-4");
+                choice = Integer.parseInt(s.nextLine());
              }
          //} while (loop);
-*/
+
          //public static int
      }
  }
