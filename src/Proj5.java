@@ -76,7 +76,7 @@
          }
      } // end of enum
 
-     public static String[] getDD_MM_YYYY(int[][] datePieces) {
+     public static String[] getDD_MM_YYYY(int[][] datePieces) { //OPTION 1
          String day = null, month = null, year = null;
 
          String[] dates = new String[datePieces.length];
@@ -92,8 +92,8 @@
 
          }
          return dates;
-     } // end of getDD_MM_YYYY
-     public static String[] getDD_Mon_YYYY(int[][] datePieces){
+     } // end of getDD_MM_YYYY - option 1
+     public static String[] getDD_Mon_YYYY(int[][] datePieces){ // OPTION 2
          String day = null, month = null, year = null;
 
          String[] dates = new String[datePieces.length];
@@ -109,5 +109,5 @@
 
          }
          return dates;
-     } // end of getDD_Mon_YYYY
+     } // end of getDD_Mon_YYYY - option 2
  }
