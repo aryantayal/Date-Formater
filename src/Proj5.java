@@ -24,9 +24,11 @@
          String inputFile = s.nextLine();
          in = new FileInputStream(inputFile);
 
+         /*
          System.out.print("Enter name of output file: ");
          String outputFile = s.nextLine();
          out = new FileOutputStream(outputFile);
+           */
 
          Scanner inFile = new Scanner(new File(inputFile));
          int firstLine = Integer.parseInt(inFile.nextLine());
@@ -75,7 +77,6 @@
      } // end of enum
 
      public static String[] getDD_MM_YYYY(int[][] datePieces) {
-         //String format = String.format("%05d", datePieces[i][1]);
          String day = null, month = null, year = null;
 
          String[] dates = new String[datePieces.length];
@@ -92,5 +93,21 @@
          }
          return dates;
      } // end of getDD_MM_YYYY
+     public static String[] getDD_Mon_YYYY(int[][] datePieces){
+         String day = null, month = null, year = null;
 
+         String[] dates = new String[datePieces.length];
+
+         for (int i = 0; i < datePieces.length; i++) {
+
+             day = String.format("%02d", datePieces[i][DateValue.DAY.label]);
+             month = String.format("%02d", datePieces[i][DateValue.MONTH.label]);
+             year = String.format("%04d", datePieces[i][DateValue.YEAR.label]);
+
+             dates[i] = (day + month + ", " + year);
+             //System.out.println(dates[i]);
+
+         }
+         return dates;
+     } // end of getDD_Mon_YYYY
  }
