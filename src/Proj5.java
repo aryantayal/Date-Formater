@@ -66,6 +66,9 @@
      }// end main
 
      public enum DateValue {
+         /**
+          * just an enum for clarity
+          */
          DAY(0),
          MONTH(1),
          YEAR(2);
@@ -77,6 +80,13 @@
      } // end of enum
 
      public static String[] getDD_MM_YYYY(int[][] datePieces) { //OPTION 1
+         /**
+          * formats the date into DD/MM/YYY
+          *
+          * @param int array that is being passed into the method with the date
+          *
+          * @return (describe what is returned)
+          */
          String day = null, month = null, year = null;
 
          String[] dates = new String[datePieces.length];
@@ -160,5 +170,5 @@
 
          return julianDay;
 
-     }
+     }// end of getJulianDay
  }
