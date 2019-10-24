@@ -1,12 +1,12 @@
- /* This program
-  *
+ /* This program  that converts a file of dates into different formats.
+  *The program will get an input file of dates from the user,
+  *ask them what format they wish to convert the dates to
+  *and then print the formatted list of dates to a specified output file.
   *
   * Aryan Tayal
   * Project 5
-  * Thurs 2:30
+  * Thursday 2:30
   */
-
-
  import java.io.File;
  import java.io.FileInputStream;
  import java.io.FileOutputStream;
