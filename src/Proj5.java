@@ -55,7 +55,7 @@
          } else if (choice == 2) {
              getDD_Mon_YYYY(datePieces);
          } else if (choice == 3) {
-
+             getLongFormat(datePieces);
          } else if (choice == 4) {
              getJulianFormat(datePieces);
          } else {
@@ -135,7 +135,23 @@
          return dates;
      } // end of getDD_Mon_YYYY - option 2
      public static String[] getLongFormat(int[][] datePieces){
+         int day = 0;
+         int month = 0;
+         int year = 0;
+         String DOW = null;
+         String[] dates = new String[datePieces.length];
 
+         for (int i = 0; i < datePieces.length; i++) {
+             day = datePieces[i][DateValue.DAY.label];
+             month = datePieces[i][DateValue.MONTH.label];
+             year = datePieces[i][DateValue.YEAR.label];
+
+             String dayStr = day + "";
+             DOW = getDayOfWeek(month, day, year);
+             System.out.format("%04d", year);
+             System.out.print(DOW + "\n");
+         }
+         return dates;
      }
      public static String[] getJulianFormat(int[][] datePieces) {
 
@@ -175,22 +191,22 @@
 
      }// end of getJulianDay
      public static String getDayOfWeek(int m, int d, int y){
-         int newM;
-         int newY;
+         int newM = 0;
+         int newY = 0;
          String DOW = null;
 
-         if(m >= 3 && m<= 12){
+         if(m > 2 && m< 13){
              newM = m-2;
              newY = y;
          }
-         if(m>0 && m<3){
+         else if(m>0 && m<3){
              newM= m+10;
              newY = y-1;
          }
          int year_last = newY % 100;
          int year_first = newY / 100;
          int val = d + ((13*newM - 1)/5) + year_last + (year_last/4) + (year_first/4) - 2*year_first;
-         switch(val)
+         switch(val % 7)
          {
              case  0: DOW = "Sunday"; break;
              case  1: DOW = "Monday"; break;
