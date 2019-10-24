@@ -221,11 +221,9 @@
 
              julianDate = getJulianDay(month, day, year);
 
-             String dayStr = julianDate + "";
+             //String dayStr = julianDate + "";
              String yearStr = year + "";
-
-             //System.out.format("%04d", year);
-            // System.out.print(julianDate + "\n");
+             String dayStr = String.format("%03d", julianDate);
 
              dates[i] = (yearStr + dayStr);
              //System.out.println(dates[i]);
