@@ -124,21 +124,41 @@
          }
          return dates;
      } // end of getDD_Mon_YYYY - option 2
-     public static String[] getJulianFormat(int[][] datePieces){
-         String day = null, month = null, year = null;
+     public static String[] getJulianFormat(int[][] datePieces) {
 
+         int day = 0;
+         int month = 0;
+         int year = 0;
+         int julianDate;
          String[] dates = new String[datePieces.length];
 
          for (int i = 0; i < datePieces.length; i++) {
-
-             day = String.format("%03d", datePieces[i][DateValue.DAY.label]);
-             //month = String.format("%02d", datePieces[i][DateValue.MONTH.label]);
-             year = String.format("%04d", datePieces[i][DateValue.YEAR.label]);
-
+             day = datePieces[i][DateValue.DAY.label];
+             month = datePieces[i][DateValue.MONTH.label];
+             year = datePieces[i][DateValue.YEAR.label];
              dates[i] = (day + "/" + month + "/" + year);
-             //System.out.println(dates[i]);
 
+             julianDate = getJulianDay(month, day, year);
+             System.out.format("%04d", year);
+             System.out.print(julianDate + "\n");
          }
          return dates;
      }// end of getJulianFormat - option 3
+     public static int getJulianDay(int m, int d, int y){
+         int daysByMonths = 0;
+
+         int[] daysMonth = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+         if (y % 4 == 0) {
+             daysMonth[2] = 29;
+         }
+         for (int i = 1; i < m; i++){
+             daysByMonths += daysMonth[i];
+         }
+         int julianDay;
+         julianDay = daysByMonths + d;
+
+
+         return julianDay;
+
+     }
  }
