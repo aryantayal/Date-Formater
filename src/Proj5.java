@@ -145,14 +145,32 @@
              day = datePieces[i][DateValue.DAY.label];
              month = datePieces[i][DateValue.MONTH.label];
              year = datePieces[i][DateValue.YEAR.label];
+            String monthStr = month + "";
+             switch(datePieces[i][DateValue.MONTH.label])
+             {
+                 case  1: monthStr = "January"; break;
+                 case  2: monthStr = "Feburary"; break;
+                 case  3: monthStr = "March"; break;
+                 case  4: monthStr = "April"; break;
+                 case  5: monthStr = "May"; break;
+                 case  6: monthStr = "June"; break;
+                 case  7: monthStr = "July"; break;
+                 case  8: monthStr = "August"; break;
+                 case  9: monthStr = "September"; break;
+                 case  10: monthStr = "October"; break;
+                 case  11: monthStr = "November"; break;
+                 case 12: monthStr = "December"; break;
+             }
 
              String dayStr = day + "";
              DOW = getDayOfWeek(month, day, year);
-             System.out.format("%04d", year);
-             System.out.print(DOW + "\n");
+             String yearStr = year + "";
+
+             dates[i] = (DOW + ", " + monthStr + " " + dayStr + ", " + yearStr);
+             System.out.println(dates[i]);
          }
          return dates;
-     }
+     } // end of getLongFormat - option 3
      public static String[] getJulianFormat(int[][] datePieces) {
 
          int day = 0;
@@ -166,10 +184,19 @@
              month = datePieces[i][DateValue.MONTH.label];
              year = datePieces[i][DateValue.YEAR.label];
              //dates[i] = (day + "/" + month + "/" + year);
-            String dayStr = day + "";
+
+
              julianDate = getJulianDay(month, day, year);
-             System.out.format("%04d", year);
-             System.out.print(julianDate + "\n");
+
+             String dayStr = julianDate + "";
+             String monthStr = month + "";
+             String yearStr = year + "";
+
+             //System.out.format("%04d", year);
+            // System.out.print(julianDate + "\n");
+
+             dates[i] = (yearStr + dayStr);
+             System.out.println(dates[i]);
          }
          return dates;
      }// end of getJulianFormat - option 4
@@ -206,6 +233,9 @@
          int year_last = newY % 100;
          int year_first = newY / 100;
          int val = d + ((13*newM - 1)/5) + year_last + (year_last/4) + (year_first/4) - 2*year_first;
+         if(val<0){
+             val += 7;
+         }
          switch(val % 7)
          {
              case  0: DOW = "Sunday"; break;
