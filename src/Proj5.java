@@ -134,6 +134,9 @@
          }
          return dates;
      } // end of getDD_Mon_YYYY - option 2
+     public static String[] getLongFormat(int[][] datePieces){
+
+     }
      public static String[] getJulianFormat(int[][] datePieces) {
 
          int day = 0;
@@ -146,14 +149,14 @@
              day = datePieces[i][DateValue.DAY.label];
              month = datePieces[i][DateValue.MONTH.label];
              year = datePieces[i][DateValue.YEAR.label];
-             dates[i] = (day + "/" + month + "/" + year);
-
+             //dates[i] = (day + "/" + month + "/" + year);
+            String dayStr = day + "";
              julianDate = getJulianDay(month, day, year);
              System.out.format("%04d", year);
              System.out.print(julianDate + "\n");
          }
          return dates;
-     }// end of getJulianFormat - option 3
+     }// end of getJulianFormat - option 4
      public static int getJulianDay(int m, int d, int y){
          int daysByMonths = 0;
 
@@ -171,4 +174,32 @@
          return julianDay;
 
      }// end of getJulianDay
+     public static String getDayOfWeek(int m, int d, int y){
+         int newM;
+         int newY;
+         String DOW = null;
+
+         if(m >= 3 && m<= 12){
+             newM = m-2;
+             newY = y;
+         }
+         if(m>0 && m<3){
+             newM= m+10;
+             newY = y-1;
+         }
+         int year_last = newY % 100;
+         int year_first = newY / 100;
+         int val = d + ((13*newM - 1)/5) + year_last + (year_last/4) + (year_first/4) - 2*year_first;
+         switch(val)
+         {
+             case  0: DOW = "Sunday"; break;
+             case  1: DOW = "Monday"; break;
+             case  2: DOW = "Tuesday"; break;
+             case  3: DOW = "Wednesday"; break;
+             case  4: DOW = "Thursday"; break;
+             case  5: DOW = "Friday"; break;
+             case  6: DOW = "Saturday"; break;
+         }
+         return DOW;
+     } // end of getDayOfWeek
  }
