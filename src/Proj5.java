@@ -41,7 +41,6 @@
              System.out.println("Invalid Entry, Please enter a value from 1-4");
          }
      }// end main
-
      /**
       *  this takes the input file name and also splits the input file dates
       *  into an array
@@ -233,7 +232,6 @@
          }
          return dates;
      }// end of getJulianFormat - option 4
-
      /**
       * this calculates the day for the julian time
       * @param m - month int
@@ -258,7 +256,6 @@
          return julianDay;
 
      }// end of getJulianDay
-
      /**
       * this calculates the day of the week
       * @param m - month int
@@ -297,5 +294,4 @@
          }
          return DOW;
      } // end of getDayOfWeek
-
  }
