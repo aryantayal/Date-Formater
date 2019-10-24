@@ -7,30 +7,51 @@
   * Project 5
   * Thursday 2:30
   */
- import java.io.File;
- import java.io.FileInputStream;
- import java.io.FileOutputStream;
- import java.io.IOException;
+ import java.io.*;
  import java.util.Scanner;
 
  public class Proj5 {
      public static void main(String[] args) throws IOException {
-         FileInputStream in = null;
-         FileOutputStream out = null;
-         boolean loop;
 
          Scanner s = new Scanner(System.in);
          System.out.print("Enter name of input file: ");
          String inputFile = s.nextLine();
-         in = new FileInputStream(inputFile);
 
-         /*
+         int[][] datePieces = readInputFile(inputFile);
+
          System.out.print("Enter name of output file: ");
          String outputFile = s.nextLine();
-         out = new FileOutputStream(outputFile);
-           */
 
-         Scanner inFile = new Scanner(new File(inputFile));
+         System.out.print("Choose a date format type:");
+         System.out.print("\n\t(1) DD/MM/YYYY (ex. 26/08/2019, with leading zeroes on months and days)");
+         System.out.print("\n\t(2) DD Mon, YYYY (ex. 26 Aug, 2019, with leading zeroes on days)");
+         System.out.print("\n\t(3) DOW, Month DDD, YYYY (ex. Monday, August 26, 2019, no leading zeroes)");
+         System.out.print("\n\t(4) Julian format, YYYYddd (where dd is day from 001-365)\n" +
+                 "Enter an option, 1-4:");
+         int choice = Integer.parseInt(s.nextLine());
+         if (choice == 1) {
+             printFile(outputFile, getDD_MM_YYYY(datePieces));
+         } else if (choice == 2) {
+             printFile(outputFile, getDD_Mon_YYYY(datePieces));
+         } else if (choice == 3) {
+             printFile(outputFile, getLongFormat(datePieces));
+         } else if (choice == 4) {
+             printFile(outputFile,getJulianFormat(datePieces));
+         } else {
+             System.out.println("Invalid Entry, Please enter a value from 1-4");
+         }
+     }// end main
+
+     /**
+      *  this takes the input file name and also splits the input file dates
+      *  into an array
+      * @param filename - string of the file name
+      * @return the array with the split day/month/year
+      * @throws IOException
+      */
+     public static int[][] readInputFile(String filename) throws IOException{
+
+         Scanner inFile = new Scanner(new File(filename));
          int firstLine = Integer.parseInt(inFile.nextLine());
          int[][] datePieces = new int[firstLine][3];
 
@@ -40,35 +61,29 @@
              datePieces[i][1] = Integer.parseInt(tokens[0]); // month
              datePieces[i][2] = Integer.parseInt(tokens[2]); // year
          }
-        inFile.close();
+         inFile.close();
+         return datePieces;
+     }
 
-         //do {
-         System.out.print("Choose a date format type:");
-         System.out.print("\n\t(1) DD/MM/YYYY (ex. 26/08/2019, with leading zeroes on months and days)");
-         System.out.print("\n\t(2) DD Mon, YYYY (ex. 26 Aug, 2019, with leading zeroes on days)");
-         System.out.print("\n\t(3) DOW, Month DDD, YYYY (ex. Monday, August 26, 2019, no leading zeroes)");
-         System.out.print("\n\t(4) Julian format, YYYYddd (where dd is day from 001-365)\n" +
-                 "Enter an option, 1-4:");
-         int choice = Integer.parseInt(s.nextLine());
-         if (choice == 1) {
-             getDD_MM_YYYY(datePieces);
-         } else if (choice == 2) {
-             getDD_Mon_YYYY(datePieces);
-         } else if (choice == 3) {
-             getLongFormat(datePieces);
-         } else if (choice == 4) {
-             getJulianFormat(datePieces);
-         } else {
-             System.out.println("Invalid Entry, Please enter a value from 1-4");
-             choice = Integer.parseInt(s.nextLine());
+     /**
+      * writes the new formated dates into a file
+      * @param oName - the output name
+      * @param newFormat - the string array that is written into an output file
+      * @throws IOException
+      */
+     public static void printFile(String oName, String[] newFormat) throws IOException{
+         PrintWriter pw = new PrintWriter(new FileWriter(oName));
+         for(int i = 0; i <newFormat.length; i++){
+             pw.println(newFormat[i]);
          }
-         //} while (loop);
-     }// end main
+         pw.close();
+     }
 
+     /**
+      * just an enum for clarity
+      */
      public enum DateValue {
-         /**
-          * just an enum for clarity
-          */
+
          DAY(0),
          MONTH(1),
          YEAR(2);
@@ -79,6 +94,11 @@
          }
      } // end of enum
 
+     /**
+      * converts date to DD MM YYYY
+      * @param datePieces - int array with date values
+      * @return dates - the string with the reformatted dates
+      */
      public static String[] getDD_MM_YYYY(int[][] datePieces) { //OPTION 1
          /**
           * formats the date into DD/MM/YYY
@@ -103,6 +123,12 @@
          }
          return dates;
      } // end of getDD_MM_YYYY - option 1
+
+     /**
+      *
+      * @param datePieces - int array with date values
+      * @return dates - the string with the reformatted dates
+      */
      public static String[] getDD_Mon_YYYY(int[][] datePieces){ // OPTION 2
          String day = null, month = null, year = null;
 
@@ -129,11 +155,14 @@
                  case 12: month = "Dec"; break;
              }
              dates[i] = (day + " " + month + ", " + year);
-            // System.out.println(dates[i]);
-
          }
          return dates;
      } // end of getDD_Mon_YYYY - option 2
+     /**
+      *
+      * @param datePieces - int array with date values
+      * @return dates - the string with the reformatted dates
+      */
      public static String[] getLongFormat(int[][] datePieces){
          int day = 0;
          int month = 0;
@@ -171,6 +200,11 @@
          }
          return dates;
      } // end of getLongFormat - option 3
+     /**
+      *
+      * @param datePieces - int array with date values
+      * @return dates - the string with the reformatted dates
+      */
      public static String[] getJulianFormat(int[][] datePieces) {
 
          int day = 0;
@@ -189,17 +223,24 @@
              julianDate = getJulianDay(month, day, year);
 
              String dayStr = julianDate + "";
-             String monthStr = month + "";
              String yearStr = year + "";
 
              //System.out.format("%04d", year);
             // System.out.print(julianDate + "\n");
 
              dates[i] = (yearStr + dayStr);
-             System.out.println(dates[i]);
+             //System.out.println(dates[i]);
          }
          return dates;
      }// end of getJulianFormat - option 4
+
+     /**
+      *
+      * @param m
+      * @param d
+      * @param y
+      * @return
+      */
      public static int getJulianDay(int m, int d, int y){
          int daysByMonths = 0;
 
@@ -217,6 +258,14 @@
          return julianDay;
 
      }// end of getJulianDay
+
+     /**
+      *
+      * @param m
+      * @param d
+      * @param y
+      * @return
+      */
      public static String getDayOfWeek(int m, int d, int y){
          int newM = 0;
          int newY = 0;
@@ -233,7 +282,7 @@
          int year_last = newY % 100;
          int year_first = newY / 100;
          int val = d + ((13*newM - 1)/5) + year_last + (year_last/4) + (year_first/4) - 2*year_first;
-         if(val<0){
+         while(val<0){
              val += 7;
          }
          switch(val % 7)
@@ -248,4 +297,5 @@
          }
          return DOW;
      } // end of getDayOfWeek
+
  }
