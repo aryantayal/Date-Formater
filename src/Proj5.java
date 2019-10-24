@@ -95,7 +95,7 @@
      } // end of enum
 
      /**
-      * converts date to DD MM YYYY
+      * converts date to DD MM YYYY format
       * @param datePieces - int array with date values
       * @return dates - the string with the reformatted dates
       */
@@ -125,7 +125,7 @@
      } // end of getDD_MM_YYYY - option 1
 
      /**
-      *
+      * converts date to DD Mon YYYY format
       * @param datePieces - int array with date values
       * @return dates - the string with the reformatted dates
       */
@@ -159,7 +159,7 @@
          return dates;
      } // end of getDD_Mon_YYYY - option 2
      /**
-      *
+      *  converts date to the Long Format format
       * @param datePieces - int array with date values
       * @return dates - the string with the reformatted dates
       */
@@ -196,12 +196,12 @@
              String yearStr = year + "";
 
              dates[i] = (DOW + ", " + monthStr + " " + dayStr + ", " + yearStr);
-             System.out.println(dates[i]);
+             //System.out.println(dates[i]);
          }
          return dates;
      } // end of getLongFormat - option 3
      /**
-      *
+      * converts date to Julian format
       * @param datePieces - int array with date values
       * @return dates - the string with the reformatted dates
       */
@@ -235,11 +235,11 @@
      }// end of getJulianFormat - option 4
 
      /**
-      *
-      * @param m
-      * @param d
-      * @param y
-      * @return
+      * this calculates the day for the julian time
+      * @param m - month int
+      * @param d - day int
+      * @param y - year int
+      * @return julianDay - the int that has the calculated julian day
       */
      public static int getJulianDay(int m, int d, int y){
          int daysByMonths = 0;
@@ -260,11 +260,11 @@
      }// end of getJulianDay
 
      /**
-      *
-      * @param m
-      * @param d
-      * @param y
-      * @return
+      * this calculates the day of the week
+      * @param m - month int
+      * @param d - day int
+      * @param y - year int
+      * @return DOW - String for the DOW
       */
      public static String getDayOfWeek(int m, int d, int y){
          int newM = 0;
