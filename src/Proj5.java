@@ -2,7 +2,7 @@
   *
   *
   * Aryan Tayal
-  * Project 4
+  * Project 5
   * Thurs 2:30
   */
 
@@ -57,7 +57,7 @@
          } else if (choice == 3) {
 
          } else if (choice == 4) {
-
+             getJulianFormat(datePieces);
          } else {
              System.out.println("Invalid Entry, Please enter a value from 1-4");
              choice = Integer.parseInt(s.nextLine());
@@ -124,4 +124,21 @@
          }
          return dates;
      } // end of getDD_Mon_YYYY - option 2
+     public static String[] getJulianFormat(int[][] datePieces){
+         String day = null, month = null, year = null;
+
+         String[] dates = new String[datePieces.length];
+
+         for (int i = 0; i < datePieces.length; i++) {
+
+             day = String.format("%03d", datePieces[i][DateValue.DAY.label]);
+             //month = String.format("%02d", datePieces[i][DateValue.MONTH.label]);
+             year = String.format("%04d", datePieces[i][DateValue.YEAR.label]);
+
+             dates[i] = (day + "/" + month + "/" + year);
+             //System.out.println(dates[i]);
+
+         }
+         return dates;
+     }// end of getJulianFormat - option 3
  }
